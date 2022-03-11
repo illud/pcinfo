@@ -1,7 +1,7 @@
 # PC-INFO
 
 \
-PC-INFO is tool that gathers information on some of the main devices of your system.
+PC-INFO is a tool that gathers information of your system components.
 
 ![Hello World](https://raw.githubusercontent.com/saturnavt/eskolvar.github.io/main/assets/img/pcinfo.jpeg)
 
