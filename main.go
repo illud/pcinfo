@@ -12,6 +12,7 @@ import (
 	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/layout"
+	"fyne.io/fyne/v2/widget"
 
 	"github.com/shirou/gopsutil/cpu"
 	"github.com/shirou/gopsutil/disk"
@@ -65,13 +66,14 @@ func main() {
 	// change icon
 	myApp.SetIcon(r)
 	myWindow := myApp.NewWindow("PC-INFO")
+	myWindow.CenterOnScreen()
 
-	text1 := canvas.NewText("Hostname: "+hostStat.Hostname, color.White)
-	text2 := canvas.NewText("Platform: "+hostStat.Platform, color.White)
-	text3 := canvas.NewText("Board: "+replaces, color.White)
-	text4 := canvas.NewText("CPU: "+cpuStat[0].ModelName, color.White)
-	text5 := canvas.NewText("GPU: "+replace2, color.White)
-	text6 := canvas.NewText("RAM: "+strconv.FormatUint(vmStat.Total/1024/1024, 10)[0:2]+"gb", color.White)
+	text1 := canvas.NewText("  Hostname: "+hostStat.Hostname, color.White)
+	text2 := canvas.NewText("  Platform: "+hostStat.Platform, color.White)
+	text3 := canvas.NewText("  Mainboard: "+replaces, color.White)
+	text4 := canvas.NewText("  CPU: "+cpuStat[0].ModelName, color.White)
+	text5 := canvas.NewText("  GPU: "+replace2, color.White)
+	text6 := canvas.NewText("  RAM: "+strconv.FormatUint(vmStat.Total/1024/1024, 10)[0:2]+"gb", color.White)
 
 	content := container.New(layout.NewHBoxLayout(), text1)
 	content2 := container.New(layout.NewHBoxLayout(), text2)
@@ -80,6 +82,16 @@ func main() {
 	content5 := container.New(layout.NewHBoxLayout(), text5)
 	content6 := container.New(layout.NewHBoxLayout(), text6)
 
-	myWindow.SetContent(container.New(layout.NewVBoxLayout(), content, content2, content3, content4, content5, content6))
+	tabs := container.NewAppTabs(
+		container.NewTabItem("SPECS ", container.New(layout.NewVBoxLayout(), content, content2, content3, content4, content5, content6)),
+		container.NewTabItem("About ", container.New(layout.NewVBoxLayout(), widget.NewLabel(" Version: 0.0.0 11/03/2022 \n Author: Alejandro"))),
+	)
+
+	//tabs.Append(container.NewTabItemWithIcon("Home", theme.HomeIcon(), widget.NewLabel("Home tab")))
+
+	tabs.SetTabLocation(container.TabLocationLeading)
+
+	myWindow.Resize(fyne.NewSize(300, 320))
+	myWindow.SetContent(tabs)
 	myWindow.ShowAndRun()
 }

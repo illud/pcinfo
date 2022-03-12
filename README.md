@@ -9,9 +9,9 @@ PC-INFO is a tool that gathers information of your system components.
 <a href="https://github.com/saturnavt/pcinfo/releases/download/Pre-Alpha/main.exe" target="_blank">CLICK HERE TO DOWNLOAD</a>
 
 ## Features
-- BOARD name
-- CPU name
-- GPU name
+- Mainboard
+- CPU
+- GPU
 - RAM
 - HOSTNAME
 - PLATFORM
